@@ -2,13 +2,17 @@
   <v-app theme="dark">
     <v-container class="py-8">
       <v-row>
-        <v-col cols="12" md="8" offset-md="2">
+        <!-- Header Section -->
+        <v-col cols="12">
           <div class="text-center mb-8">
             <h1 class="text-h2 font-weight-bold gradient-text mb-2">SimpleStack Devlog</h1>
             <div class="text-subtitle-1 text-medium-emphasis">Share your thoughts with the world</div>
           </div>
+        </v-col>
 
-          <v-card class="mb-8 create-post-card" elevation="4">
+        <!-- Create Post Section - Left Column -->
+        <v-col cols="12" md="6">
+          <v-card class="mb-8 create-post-card sticky-card" elevation="4">
             <v-card-title class="text-h5 pa-4">Create New Post</v-card-title>
             <v-card-text>
               <v-form ref="createForm" v-model="createFormValid">
@@ -74,7 +78,10 @@
               </v-form>
             </v-card-text>
           </v-card>
+        </v-col>
 
+        <!-- Blog Posts Section - Right Column -->
+        <v-col cols="12" md="6">
           <div v-if="posts.length === 0" class="text-center text-body-1 text-medium-emphasis">
             No posts available. Be the first to create one!
           </div>
@@ -103,7 +110,7 @@
                 </v-form>
               </template>
               <template v-else>
-                <div class="text-h5">{{ post.title }}</div>
+                <div class="text-h5 title-wrap">{{ post.title }}</div>
                 <div class="text-caption text-medium-emphasis mt-1">
                   {{ new Date(post.created_at).toLocaleDateString() }}
                 </div>
@@ -184,8 +191,10 @@
               </template>
             </v-card-actions>
           </v-card>
+        </v-col>
 
-          <!-- Technology Stack Section -->
+        <!-- Technology Stack Section -->
+        <v-col cols="12">
           <v-card class="mt-12 tech-stack-card" elevation="4">
             <v-card-title class="text-h5 pa-4">
               <v-icon start color="primary" class="me-2">mdi-code-tags</v-icon>
@@ -460,10 +469,14 @@ export default {
 
 .v-text-field .v-field__input {
   min-height: 44px;
+  white-space: pre-wrap;
+  word-wrap: break-word;
 }
 
 .v-textarea .v-field__input {
   min-height: 100px;
+  white-space: pre-wrap;
+  word-wrap: break-word;
 }
 
 .tech-stack-card {
@@ -484,5 +497,23 @@ export default {
 .v-chip {
   font-weight: 500;
   letter-spacing: 0.5px;
+}
+
+.sticky-card {
+  position: sticky;
+  top: 24px;
+}
+
+@media (max-width: 960px) {
+  .sticky-card {
+    position: static;
+  }
+}
+
+.title-wrap {
+  word-wrap: break-word;
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
+  max-width: 100%;
 }
 </style>
